@@ -1,5 +1,5 @@
 require 'telegram_bot'
-token = '709950422:AAHWZCLWu5caFzHYRF4q8pW-rFvZ0xBVYik'
+token = '##########################################'
 bot = TelegramBot.new(token: token)
 
 def guess()
