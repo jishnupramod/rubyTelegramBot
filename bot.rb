@@ -1,5 +1,5 @@
 require 'telegram_bot'
-token = '##########################################'
+token = '########################################'
 bot = TelegramBot.new(token: token)
 
 def guess()
@@ -16,7 +16,6 @@ def check(com, num)
     end
 end
 
-
 bot.get_updates(fail_silently: true) do |message|
     puts "@#{message.from.username}: #{message.text}"
     command = message.get_command_for(bot)
@@ -24,8 +23,11 @@ bot.get_updates(fail_silently: true) do |message|
     message.reply do |reply|
         case command
         when /start/i
-            reply.text = "All I can do is say hello and play guessing game.\n
-                        . Try the /greet command or /play command"
+            reply.text = "All I can do is say hello and play guessing game.
+                        \nTry the /greet command or /play command"
+        when /hello/i
+            reply.text = "All I can do is say hello and play guessing game.
+                        \nTry the /greet command or /play command"
         when /greet/i
             reply.text = "Hello, #{message.from.first_name} ! "
         when /play/i
@@ -40,7 +42,7 @@ bot.get_updates(fail_silently: true) do |message|
                     res = check(com, message.text.to_i)
                 end
                 if(res == 1)
-                    reply.text = "Hurraay! You guessed it right..."
+                    reply.text = "Hurraay! You guessed it right...\n /play again or /bye for now"
                     break
                 elsif(res == 2)
                     reply.text = "You guessed a smaller number. Try a higher one..."
@@ -49,6 +51,10 @@ bot.get_updates(fail_silently: true) do |message|
                 elsif(res == 3)
                     reply.text = "You guessed a higher number. Try a smaller one..."
                     puts "You guessed #{message.text}"
+                    reply.send_with(bot)
+                else
+                    reply.text = "You are supposed to guess a number.
+                                    \nDon't play around with me !"
                     reply.send_with(bot)
                 end
             end
