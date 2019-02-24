@@ -1,5 +1,5 @@
 require 'telegram_bot'
-token = '########################################'
+token = '709950422:AAHWZCLWu5caFzHYRF4q8pW-rFvZ0xBVYik'
 bot = TelegramBot.new(token: token)
 
 def guess()
@@ -31,6 +31,7 @@ bot.get_updates(fail_silently: true) do |message|
         when /greet/i
             reply.text = "Hello, #{message.from.first_name} ! "
         when /play/i
+            chance = 1
             com = guess()
             puts "Assigned number is #{com}."
             reply.text = "I have guessed a random number between 1 and 100.\
@@ -42,14 +43,17 @@ bot.get_updates(fail_silently: true) do |message|
                     res = check(com, message.text.to_i)
                 end
                 if(res == 1)
-                    reply.text = "Hurraay! You guessed it right...\n /play again or /bye for now"
+                    reply.text = "Hurraay! You guessed it right...\n /play again or /bye for now
+                                    \n You guessed it in #{chance} chance#{chance==1?'':'s'}"
                     break
                 elsif(res == 2)
                     reply.text = "You guessed a smaller number. Try a higher one..."
+                    chance += 1
                     puts "You guessed #{message.text}"
                     reply.send_with(bot)
                 elsif(res == 3)
                     reply.text = "You guessed a higher number. Try a smaller one..."
+                    chance += 1
                     puts "You guessed #{message.text}"
                     reply.send_with(bot)
                 else
