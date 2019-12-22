@@ -13,7 +13,7 @@ GEM
     excon (0.62.0)
     ice_nine (0.11.2)
     telegram_bot (0.0.8)
-      excon (>= 0.30.0)
+      excon (>= 0.71.0)
       virtus (>= 1.0.0)
     thread_safe (0.3.6)
     virtus (1.0.5)
